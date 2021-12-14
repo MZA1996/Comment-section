@@ -20,6 +20,15 @@ function addComment(ev) {
     const deleteButton = document.createElement('button');
     deleteButton.innerHTML = 'Delete';
     deleteButton.className = 'deleteComment';
+    const smileyButton = document.createElement('button');
+    smileyButton.innerHTML = '&#x263A';
+    smileyButton.className = 'smiley'
+    const sadButton = document.createElement('button');
+    sadButton.innerHTML = '&#x2639';
+    sadButton.className = 'sad'
+    const fireButton = document.createElement('button');
+    fireButton.innerHTML = '&#x1F525';
+    fireButton.className = 'fire'
     if(hasClass(ev.target.parentElement, 'container')) {
         const wrapDiv = document.createElement('div');
         wrapDiv.className = 'wrapper';
@@ -28,7 +37,7 @@ function addComment(ev) {
         document.getElementById('comment').value = '';
         textBox.innerHTML = commentText;
         textBox.style.backgroundColor = "cornflowerblue";
-        wrapDiv.append(textBox, replyButton, likeButton, deleteButton);
+        wrapDiv.append(textBox, replyButton, likeButton, deleteButton, smileyButton, sadButton, fireButton);
         commentContainer.appendChild(wrapDiv);
     } else {
         wrapDiv = ev.target.parentElement;
@@ -36,7 +45,7 @@ function addComment(ev) {
         textBox.innerHTML = commentText;
         textBox.style.backgroundColor = "paleturquoise";
         wrapDiv.innerHTML = '';
-        wrapDiv.append(textBox, replyButton, likeButton, deleteButton);
+        wrapDiv.append(textBox, replyButton, likeButton, deleteButton, smileyButton, sadButton, fireButton);
     }
     setOnLocalStorage();
 }
@@ -75,6 +84,18 @@ document.getElementById('allComments').addEventListener('click', function (e) {
         setOnLocalStorage();
     } else if(hasClass(e.target, 'deleteComment')) {
         e.target.parentElement.remove();
+    } else if(hasClass(e.target, 'smiley')) {
+        const smileyBtnValue = e.target.innerHTML;
+        e.target.innerHTML = smileyBtnValue == '&#x263A' ? Number.parseInt(smileyBtnValue) + 1 : 1;
+       setOnLocalStorage();
+    } else if(hasClass(e.target, 'sad')) {
+        const sadBtnValue = e.target.innerHTML;
+        e.target.innerHTML = sadBtnValue == '&#x2639' ? Number.parseInt(sadBtnValue) + 1 : 1;
+       setOnLocalStorage();
+    } else if(hasClass(e.target, 'fire')) {
+        const fireBtnValue = e.target.innerHTML;
+        e.target.innerHTML = fireBtnValue == '&#x1F525' ? Number.parseInt(fireBtnValue) + 1 : 1;
+       setOnLocalStorage();
     }
 });
 
